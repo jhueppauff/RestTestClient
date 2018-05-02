@@ -1,6 +1,12 @@
-﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="https://github.com/jhueppauff/RestTestClient">
+// Copyright 2018 Jhueppauff
+// MIT
+// For licence details visit https://github.com/jhueppauff/RestTestClient/blob/master/LICENSE
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -10,9 +16,9 @@ using System.Windows;
 [assembly: AssemblyTitle("RestTestClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("https://github.com/jhueppauff/RestTestClient")]
 [assembly: AssemblyProduct("RestTestClient")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © Julian Hüppauff 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -50,6 +56,6 @@ using System.Windows;
 //
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.*")]
+// [assembly: AssemblyVersion("1.0.0.0")]
+// [assembly: AssemblyFileVersion("1.0.0.0")]
