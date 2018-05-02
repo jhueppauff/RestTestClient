@@ -13,6 +13,10 @@ namespace RestTestClient
     using System.Linq;
     using System.Windows;
     using RestSharp;
+    using Newtonsoft.Json;
+    using Microsoft.Win32;
+    using System.IO;
+    using System.Text;
 
     /// <summary>
     /// Interaction logic for MainWindow
@@ -77,6 +81,97 @@ namespace RestTestClient
                 Log.Error(ex.Message, ex);
                 ResponseViewer responseViewer = new ResponseViewer(ex.Message, ex);
                 responseViewer.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the MenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void MenuItemNew_Click(object sender, RoutedEventArgs e)
+        {
+            TbxEndpointUrl.Focus();
+            TbxBody.Text = string.Empty;
+            CbxMethod.SelectedItem = null;
+            restHeaders.Clear();
+
+            DtgHeader.ItemsSource = restHeaders;
+            DtgHeader.Items.Refresh();
+            TbxEndpointUrl.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Handles the exit event of the MenuItem_Click control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void MenuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Handles the 2 event of the MenuItem_Click control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void MenuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.CbxMethod.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a RestMethod", "Missing Method", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Json file (*.json)|*.json",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            RestRequestConfiguration requestConfiguration = new RestRequestConfiguration()
+            {
+                Body = TbxBody.Text,
+                EndpointUrl = TbxEndpointUrl.Text,
+                Method = (Method)CbxMethod.SelectedItem,
+                RestHeaders = restHeaders
+            };
+
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(requestConfiguration));
+            }    
+        }
+
+        /// <summary>
+        /// Handles the Click event of the BtnOpen control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "Json file (*.json)|*.json"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string json = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8);
+
+                RestRequestConfiguration requestConfiguration = JsonConvert.DeserializeObject<RestRequestConfiguration>(json);
+
+                this.TbxBody.Text = requestConfiguration.Body;
+                this.TbxEndpointUrl.Text = requestConfiguration.EndpointUrl;
+                this.CbxMethod.SelectedItem = requestConfiguration.Method;
+                this.restHeaders = requestConfiguration.RestHeaders;
+
+                this.TbxEndpointUrl.Focus();
+                this.DtgHeader.ItemsSource = this.restHeaders;
+                this.DtgHeader.Items.Refresh();
             }
         }
     }

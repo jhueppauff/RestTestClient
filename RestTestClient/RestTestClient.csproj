@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="RestClient.cs" />
     <Compile Include="RestHeader.cs" />
+    <Compile Include="RestRequestConfiguration.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

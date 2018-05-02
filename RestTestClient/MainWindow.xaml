@@ -5,22 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestTestClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="RestTest Client" Height="500" Width="800">
     <Grid>
-        <Button x:Name="BtnSubmit" Content="Send" HorizontalAlignment="Right" Margin="0,0,10,10" Width="75" Height="20" VerticalAlignment="Bottom" Click="BtnSubmit_Click"/>
-        <DataGrid x:Name="DtgHeader" Height="131" ItemsSource="{Binding}" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" Margin="10,95,10,0" VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding KeyName}" Width="*" Header="Name"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding KeyValue}" Width="*" Header="Value"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBox x:Name="TbxEndpointUrl" TextAlignment="Left" Height="24" Margin="10,40,118,0" TextWrapping="Wrap" Text="http://example.org" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CbxMethod" Margin="0,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" Height="24"/>
-        <Label Content="Header:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="83"/>
-        <Label Content="Body:" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TbxBody" Margin="10,257,10,35" TextWrapping="Wrap"/>
-        <Label Content="Endpoint Url:" HorizontalAlignment="Left" Margin="11,9,0,0" VerticalAlignment="Top"/>
-        <Label Content="Method:" HorizontalAlignment="Left" Margin="679,9,0,0" VerticalAlignment="Top"/>
-
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="MenuItemNew" Header="_New" Click="MenuItemNew_Click" />
+                    <MenuItem x:Name="MenuItemOpen" Header="_Open" Click="MenuItemOpen_Click" />
+                    <MenuItem x:Name="MenuItemSave" Header="_Save" Click="MenuItemSave_Click" />
+                    <Separator />
+                    <MenuItem x:Name="MenuItemExit" Header="_Exit" Click="MenuItemExit_Click" />
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+        <Grid Margin="0,20,0,0">
+            <Button x:Name="BtnSubmit" Content="Send" HorizontalAlignment="Right" Margin="0,0,10,10" Width="75" Height="20" VerticalAlignment="Bottom" Click="BtnSubmit_Click"/>
+            <DataGrid x:Name="DtgHeader" Height="131" ItemsSource="{Binding}" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False" Margin="10,95,10,0" VerticalAlignment="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding KeyName}" Width="*" Header="Name"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding KeyValue}" Width="*" Header="Value"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBox x:Name="TbxEndpointUrl" TextAlignment="Left" Height="24" Margin="10,40,118,0" TextWrapping="Wrap" Text="http://example.org" VerticalAlignment="Top"/>
+            <ComboBox x:Name="CbxMethod" Margin="0,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="103" Height="24"/>
+            <Label Content="Header:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="83"/>
+            <Label Content="Body:" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TbxBody" Margin="10,257,10,35" TextWrapping="Wrap"/>
+            <Label Content="Endpoint Url:" HorizontalAlignment="Left" Margin="11,9,0,0" VerticalAlignment="Top"/>
+            <Label Content="Method:" HorizontalAlignment="Left" Margin="679,9,0,0" VerticalAlignment="Top"></Label>
+        </Grid>
     </Grid>
 </Window>
