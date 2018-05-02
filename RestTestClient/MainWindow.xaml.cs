@@ -73,14 +73,13 @@ namespace RestTestClient
                 
                 response = restClient.ExecuteRestRequest(TbxEndpointUrl.Text, restHeaders, (Method)CbxMethod.SelectedItem, TbxBody.Text).ConfigureAwait(false).GetAwaiter().GetResult();
 
-                ResponseViewer responseViewer = new ResponseViewer(response.Content);
+                ResponseViewer responseViewer = new ResponseViewer(response);
                 responseViewer.ShowDialog();
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
-                ResponseViewer responseViewer = new ResponseViewer(ex.Message, ex);
-                responseViewer.ShowDialog();
+                MessageBox.Show(ex.Message, "An error occured", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ResponseViewer" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="TbxResponse" Margin="10,10,10,42" TextWrapping="Wrap" Text="TextBox"/>
+        <TextBox x:Name="TbxResponse" Margin="10,10,10,42" TextWrapping="Wrap"/>
         <Button x:Name="BtnClose" Content="Close" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="BtnClose_Click"/>
 
     </Grid>

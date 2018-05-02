@@ -44,21 +44,7 @@ namespace RestTestClient
 
             IRestResponse restResponse = await restClient.ExecuteTaskAsync(restRequest, cancellationTokenSource.Token).ConfigureAwait(false);
 
-            if (!restResponse.IsSuccessful && restResponse.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                if (restResponse.ErrorException != null)
-                {
-                    throw restResponse.ErrorException;
-                }
-                else
-                {
-                    throw new System.Exception(restResponse.StatusDescription);
-                }
-            }
-            else
-            {
-                return restResponse;
-            }
+            return restResponse;
         }
     }
 }

@@ -17,19 +17,14 @@ namespace RestTestClient
     public partial class ResponseViewer : Window
     {
         /// <summary>
-        /// The response text
-        /// </summary>
-        private string response;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ResponseViewer"/> class.
         /// </summary>
         /// <param name="response">The response text.</param>
-        public ResponseViewer(string response, Exception exception = null)
+        public ResponseViewer(RestSharp.IRestResponse response, Exception exception = null)
         {
             InitializeComponent();
-            this.response = response;
-            TbxResponse.Text = response;
+            TbxResponse.Text += $"Statuscode: {response.StatusDescription}\n";
+            TbxResponse.Text += response.Content;
 
             if (exception != null)
             {
