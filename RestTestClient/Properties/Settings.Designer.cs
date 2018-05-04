@@ -25,10 +25,10 @@ namespace RestTestClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:00:30")]
-        public global::System.TimeSpan Timeout {
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int Timeout {
             get {
-                return ((global::System.TimeSpan)(this["Timeout"]));
+                return ((int)(this["Timeout"]));
             }
         }
     }

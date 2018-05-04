@@ -30,7 +30,11 @@ namespace RestTestClient
         {
             RestSharp.RestClient restClient = new RestSharp.RestClient(url);
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            RestRequest restRequest = new RestRequest(method);
+            RestRequest restRequest = new RestRequest(method)
+            {
+                Timeout = Properties.Settings.Default.Timeout,
+                ReadWriteTimeout = Properties.Settings.Default.Timeout
+            };
 
             foreach (RestHeader restHeader in restHeaders)
             {
