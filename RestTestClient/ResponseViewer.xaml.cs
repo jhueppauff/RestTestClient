@@ -12,7 +12,7 @@ namespace RestTestClient
     using System.Windows;
 
     /// <summary>
-    /// Interaction logic for ResponseViewer.xaml
+    /// Interaction logic for ResponseViewer
     /// </summary>
     public partial class ResponseViewer : Window
     {
@@ -20,20 +20,21 @@ namespace RestTestClient
         /// Initializes a new instance of the <see cref="ResponseViewer"/> class.
         /// </summary>
         /// <param name="response">The response text.</param>
+        /// <param name="exception">Thrown Exception</param>
         public ResponseViewer(RestSharp.IRestResponse response, Exception exception = null)
         {
-            InitializeComponent();
-            TbxResponse.Text += $"Statuscode: {response.StatusDescription}\n";
-            TbxResponse.Text += response.Content;
+            this.InitializeComponent();
+            this.TbxResponse.Text += $"Statuscode: {response.StatusDescription}\n";
+            this.TbxResponse.Text += response.Content;
 
             if (exception != null)
             {
-                TbxResponse.Text += "\n\nStackTrace:\n" + exception.StackTrace;
+                this.TbxResponse.Text += "\n\nStackTrace:\n" + exception.StackTrace;
             }
         }
 
         /// <summary>
-        /// Handles the Click event of the BtnClose control.
+        /// Handles the Click event of the Button Close control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>

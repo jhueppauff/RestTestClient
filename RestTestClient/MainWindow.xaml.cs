@@ -10,13 +10,13 @@ namespace RestTestClient
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows;
-    using RestSharp;
-    using Newtonsoft.Json;
-    using Microsoft.Win32;
     using System.IO;
+    using System.Linq;
     using System.Text;
+    using System.Windows;
+    using Microsoft.Win32;
+    using Newtonsoft.Json;
+    using RestSharp;
 
     /// <summary>
     /// Interaction logic for MainWindow
@@ -26,7 +26,7 @@ namespace RestTestClient
         /// <summary>
         /// Log4Net Logger
         /// </summary>
-        private readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// The rest headers
@@ -38,28 +38,28 @@ namespace RestTestClient
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();
-            LoadMethods();
+            this.InitializeComponent();
+            this.LoadMethods();
 
-            DtgHeader.ItemsSource = restHeaders;
+            this.DtgHeader.ItemsSource = this.restHeaders;
         }
 
         /// <summary>
-        /// Loads the methods into the combobox.
+        /// Loads the methods into the combo box.
         /// </summary>
         private void LoadMethods()
         {
-            CbxMethod.ItemsSource = Enum.GetValues(typeof(Method)).Cast<Method>();
+            this.CbxMethod.ItemsSource = Enum.GetValues(typeof(Method)).Cast<Method>();
         }
 
         /// <summary>
-        /// Handles the Click event of the BtnSubmit control.
+        /// Handles the Click event of the Button Submit control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (CbxMethod.SelectedItem == null)
+            if (this.CbxMethod.SelectedItem == null)
             {
                 MessageBox.Show("Please select a RestMethod", "Missing Method", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -71,14 +71,14 @@ namespace RestTestClient
             {
                 RestClient restClient = new RestClient();
                 
-                response = restClient.ExecuteRestRequest(TbxEndpointUrl.Text, restHeaders, (Method)CbxMethod.SelectedItem, TbxBody.Text).ConfigureAwait(false).GetAwaiter().GetResult();
+                response = restClient.ExecuteRestRequest(this.TbxEndpointUrl.Text, this.restHeaders, (Method)this.CbxMethod.SelectedItem, this.TbxBody.Text).ConfigureAwait(false).GetAwaiter().GetResult();
 
                 ResponseViewer responseViewer = new ResponseViewer(response);
                 responseViewer.ShowDialog();
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
+                this.log.Error(ex.Message, ex);
                 MessageBox.Show(ex.Message, "An error occured", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -90,14 +90,14 @@ namespace RestTestClient
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void MenuItemNew_Click(object sender, RoutedEventArgs e)
         {
-            TbxEndpointUrl.Focus();
-            TbxBody.Text = string.Empty;
-            CbxMethod.SelectedItem = null;
-            restHeaders.Clear();
+            this.TbxEndpointUrl.Focus();
+            this.TbxBody.Text = string.Empty;
+            this.CbxMethod.SelectedItem = null;
+            this.restHeaders.Clear();
 
-            DtgHeader.ItemsSource = restHeaders;
-            DtgHeader.Items.Refresh();
-            TbxEndpointUrl.Text = string.Empty;
+            this.DtgHeader.ItemsSource = this.restHeaders;
+            this.DtgHeader.Items.Refresh();
+            this.TbxEndpointUrl.Text = string.Empty;
         }
 
         /// <summary>
@@ -134,9 +134,8 @@ namespace RestTestClient
                 Body = TbxBody.Text,
                 EndpointUrl = TbxEndpointUrl.Text,
                 Method = (Method)CbxMethod.SelectedItem,
-                RestHeaders = restHeaders
+                RestHeaders = this.restHeaders
             };
-
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -145,7 +144,7 @@ namespace RestTestClient
         }
 
         /// <summary>
-        /// Handles the Click event of the BtnOpen control.
+        /// Handles the Click event of the Button Open control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>

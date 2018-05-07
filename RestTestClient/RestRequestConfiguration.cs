@@ -1,10 +1,14 @@
-﻿namespace RestTestClient
+﻿//-----------------------------------------------------------------------
+// <copyright file="RestRequestConfiguration.cs" company="https://github.com/jhueppauff/RestTestClient">
+// Copyright 2018 Jhueppauff
+// MIT
+// For licence details visit https://github.com/jhueppauff/RestTestClient/blob/master/LICENSE
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace RestTestClient
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Rest Request Config for FileSave

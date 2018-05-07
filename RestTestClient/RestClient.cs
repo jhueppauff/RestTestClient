@@ -25,7 +25,7 @@ namespace RestTestClient
         /// <param name="restHeaders">The rest headers.</param>
         /// <param name="method">The Rest method.</param>
         /// <param name="body">The body.</param>
-        /// <returns></returns>
+        /// <returns>Returns the <see cref="IRestResponse"/></returns>
         public async Task<IRestResponse> ExecuteRestRequest(string url, List<RestHeader> restHeaders, Method method, string body = null)
         {
             RestSharp.RestClient restClient = new RestSharp.RestClient(url);
